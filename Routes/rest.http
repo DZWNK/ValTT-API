@@ -1,0 +1,21 @@
+GET http://localhost:5000
+
+###
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+   "email": "something@gmail.com",
+   "passWord": "123rty78"
+}
+###
+POST http://localhost:5000/auth/signup
+Content-Type: application/json
+
+{
+   "email": "something@gmail.com",
+   "passWord": "123rty78"
+}
+
+###
+DELETE http://localhost:5000/auth/logout
