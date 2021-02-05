@@ -5,6 +5,9 @@ require('dotenv').config()
 require('./helpers/init_mongodb')
 
 const AuthRoute = require('./Routes/Auth.route')
+const EventRoute = require('./Routes/Event.route')
+const MatchRoute = require('./Routes/Match.route')
+const TeamRoute = require('./Routes/Team.route')
 
 const app = express()
 //for logging the requests made to the API
@@ -20,6 +23,9 @@ app.get('/' , async(req, res, next) =>{
 
 //whenever route used has /auth 
 app.use('/auth', AuthRoute)
+app.use('/event', EventRoute)
+app.use('/match', MatchRoute)
+app.use('/team', TeamRoute)
 
 //for handling any non-existing routes
 app.use(async(req, res, next) =>{
