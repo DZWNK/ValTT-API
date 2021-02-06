@@ -1,66 +1,92 @@
-//Handles all the routes
-const express = require('express')
-const router = express.Router()
-const createError = require('http-errors')
-const Profile = require('../Models/Profile.model')
-const { authSchema } = require('../helpers/validation_schema')
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcrypt');
+const createError = require('http-errors');
+const User = require('../Modules/Schemas/userSchema');
+
+const userService = require("../Modules/userService");
 
 
-router.post('/signup', async(req, res, next)=>{
-    try{
-       //Validates the request body and throws error if unsuccesful validation
-       const result = await authSchema.validateAsync(req.body)
-
-       //check if the profile already exists
-       const doesProfileExist = await Profile.findOne({email: result.email})
-
-       //if profile exists throw conflict error
-       if(doesProfileExist){
-           throw createError.Conflict(`${result.email} is already registered`)
-       }
-
-       //create the new user from result and save to database
-       const profile = new Profile(result)
-       const savedProfile = await profile.save()
-
-       res.send(savedProfile)  //we should return a JWT token instead
-    }catch(error){
-        if(error.isJoi === true) {
-            error.status = 422 //422 is unprocessible entity
+router.post('/signup', (req, res) => {
+    userData.getUserByEmail(req.body.email).then((user) => {
+        if (user == null) {
+            userData.getUserByUsername(req.body.username.toLowerCase()).then((user) => {
+                if (user == null) {
+                    userData.addNewUser(req.body).then((msg) => {
+                        res.json({ message: msg });
+                    }).catch((err) => {
+                        res.json({ message: `An error occured adding User to database: ${err}` });
+                    });
+                } else {
+                    res.json({ message: 'Username already taken' });
+                }
+            }).catch((err) => {
+                console.log(`An error occured finding User by Username: ${err}`);
+            });
+        } else {
+            res.json({ message: 'Email already registered' });
         }
-        next(error) //calls the error handler
+    }).catch((err) => {
+        console.log(`An error occured finding User by Email: ${err}`);
+    });
+});
+
+router.post('/login', (req, res) => {
+    console.log('Logging in user:');
+    // Regex check if email syntax
+    let isEmail = /.*@.*/.test(req.body.login);
+    if (isEmail) {
+        // Searching user by Email
+        userData.getUserByEmail(req.body.login).then(user => {
+            if (user != null) {
+                verifyPassword(req.body.password, user.password).then(result => {
+                    if (result) {
+                        res.json({ message: 'Authentification Succeeded' });
+                        // JWT
+                    } else {
+                        res.json({ message: 'Authentification Failed' });
+                    }
+                }).catch(err => {
+                    console.log(`An error occured checking passwords: ${err}`);
+                });
+            } else {
+                res.json({ message: 'Authentification Failed' });
+            }
+        }).catch(err => {
+            console.log(`An error occured finding User by Email: ${err}`);
+        });
+    } else {
+        // Searching user by Username
+        userData.getUserByUsername(req.body.login.toLowerCase()).then(user => {
+            if (user != null) {
+                verifyPassword(req.body.password, user.password).then(result => {
+                    if (result) {
+                        res.json({ message: 'Authentification Succeeded' });
+                        // JWT
+                    } else {
+                        res.json({ message: 'Authentification Failed' });
+                    }
+                }).catch(err => {
+                    console.log(`An error occured checking passwords: ${err}`);
+                });
+            } else {
+                res.json({ message: 'Authentification Failed' });
+            }
+        }).catch(err => {
+            console.log(`An error occured finding User by Username: ${err}`);
+        });
     }
-})
+});
 
-router.post('/login', async(req, res, next)=>{
-    try{
-       //validate req and check if profile exists in database
-       const result = await authSchema.validateAsync(req.body)
-       const doesProfileExist = await Profile.findOne({email: result.email})
-
-       if(!doesProfileExist){
-           throw createError.NotFound('Profile not registered')
-       }
-
-       const matchFound = await doesProfileExist.isValidPassword(result.passWord)
-
-       //if password doesn't match send 401 unauthorized error
-       if(!matchFound){
-           throw createError.Unauthorized('Username/Password is not valid')
-       }
-       res.send(result)  //we need to send an access token instead
-    }catch(error){
-        if(error.isJoi === true) {
-            next(createError.BadRequest('Invalid Username/Password'))
-        }
-         next(error)
-    }
-})
-
-router.delete('/logout', async(req, res, next)=>{
-    //To be implemented
-    res.send('Logout Route')
-})
+function verifyPassword(password, hash) {
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(password, hash).then((result) => {
+            resolve(result);
+        }).catch(err => {
+            reject(err);
+        });
+    });
+}
 
 //allows us to use router anywhere in the app
 module.exports = router
