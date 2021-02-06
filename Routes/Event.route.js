@@ -1,12 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
-const db = require('../helpers/init_mongodb')
 
 const Match = require('../Modules/Schemas/Match.model')
 const Event = require('../Modules/Schemas/Event.model')
 const Team = require('../Modules/Schemas/Team.model')
-const User = require('../Modules/Schemas/User.model')
+const User = require('../Modules/Schemas/UserSchema')
 const Player = require('../Modules/Schemas/Player.model')
 
 //Get all the events
