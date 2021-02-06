@@ -5,7 +5,7 @@ const createError = require('http-errors')
 const Match = require('../Modules/Schemas/Match.model')
 const Event = require('../Modules/Schemas/Event.model')
 const Team = require('../Modules/Schemas/Team.model')
-const User = require('../Modules/Schemas/User.model')
+const User = require('../Modules/Schemas/UserSchema')
 const Player = require('../Modules/Schemas/Player.model')
 
 router.get('/matches', async(req, res, next) =>{

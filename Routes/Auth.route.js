@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const createError = require('http-errors');
-const User = require('../Modules/Schemas/userSchema');
+const User = require('../Modules/Schemas/UserSchema');
 
-const userService = require("../Modules/userService");
+const userService = require("../Modules/UserService");
 
 
 router.post('/signup', (req, res) => {
@@ -39,7 +39,9 @@ router.post('/login', (req, res) => {
         // Searching user by Email
         userData.getUserByEmail(req.body.login).then(user => {
             if (user != null) {
-                verifyPassword(req.body.password, user.password).then(result => {
+                console.log("Req pwd "+req.body.password)
+                console.log("Req pwd "+user.passWord)
+                verifyPassword(req.body.password, user.passWord).then(result => {
                     if (result) {
                         res.json({ message: 'Authentification Succeeded' });
                         // JWT

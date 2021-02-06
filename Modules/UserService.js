@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const profileSchema = require("./Schemas/userSchema");
+const profileSchema = require("./Schemas/UserSchema");
 
 module.exports = function(connectionString) {
     let Profile;
@@ -29,7 +29,7 @@ module.exports = function(connectionString) {
         addNewUser: function(user) {
             return new Promise((resolve, reject) => {
                 console.log("adding new User:");
-                bcrypt.hash(user.password, 10).then(hash => {
+                bcrypt.hash("myPassword123", 10).then(hash => {  //myPassword123 ?? 
                     user.password = hash;
                     let newUser = new Profile(user);
                     console.log(newUser);
