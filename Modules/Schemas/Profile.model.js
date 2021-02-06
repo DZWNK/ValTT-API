@@ -16,6 +16,7 @@ const profilesSchema = new Schema({
     }
 })
 
+/*
 //fired before mongoose tries to save a profile to database  NOTE: After saving it's .post('save)
 profilesSchema.pre('save' , async function(next){
       try{
@@ -36,7 +37,7 @@ profilesSchema.methods.isValidPassword = async function(passWord){
            throw error
        }
 }
-
+*/
 const Profile = mongoose.model('Profile', profilesSchema)
 
 //exports allows us to use Profile anywhere in the application

@@ -1,23 +1,26 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const bcrypt = require('bcrypt');
 
-const usersSchema = new Schema({
+const profilesSchema = new Schema({
     playerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Player' },
+    dateCreated: {type: Date},
     userName: {type: String, unique: true, required: true},
     passWord: {type: String, required: true},
-    favourites: [{type: String}],
+    favourites: [{type: mongoose.Schema.Types.ObjectId}], //ref to what exactly ??
     riotId: {type: String},
     isAdmin: {type: Boolean},
     isCoach: {type: Boolean},
     isEventOrganizer: {type: Boolean},
 })
 
-usersSchema.pre('findOne', function(next) {
-    this.populate('playerId');
+profilesSchema.pre('findOne', function(next) {
+    this.populate('playerId')
+    .populate('favourites');
     next();
 });
 
-const User = mongoose.model('User', usersSchema)
+//const User = mongoose.model('User', profilesSchema)
 
 //exports allows us to use User anywhere in the application
-module.exports = User
+module.exports = profilesSchema
