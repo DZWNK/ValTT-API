@@ -3,11 +3,11 @@ const router = express.Router()
 const createError = require('http-errors')
 const db = require('../helpers/init_mongodb')
 
-const Match = require('../Models/Match.model')
-const Event = require('../Models/Event.model')
-const Team = require('../Models/Team.model')
-const User = require('../Models/User.model')
-const Player = require('../Models/Player.model')
+const Match = require('../Modules/Schemas/Match.model')
+const Event = require('../Modules/Schemas/Event.model')
+const Team = require('../Modules/Schemas/Team.model')
+const User = require('../Modules/Schemas/User.model')
+const Player = require('../Modules/Schemas/Player.model')
 
 //Get all the events
 router.get('/events', async(req, res, next) =>{
