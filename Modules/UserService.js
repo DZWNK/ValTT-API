@@ -29,7 +29,7 @@ module.exports = function(connectionString) {
         addNewUser: function(user) {
             return new Promise((resolve, reject) => {
                 console.log("adding new User:");
-                bcrypt.hash("myPassword123", 10).then(hash => {  //myPassword123 ?? 
+                bcrypt.hash(user.password, 10).then(hash => {  //myPassword123 ?? 
                     user.password = hash;
                     let newUser = new Profile(user);
                     console.log(newUser);

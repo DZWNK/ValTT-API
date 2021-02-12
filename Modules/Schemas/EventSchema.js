@@ -23,7 +23,7 @@ EventsSchema.pre('findOne', function(next) {
     next();
 });
 
-const Event = mongoose.model('Event', EventsSchema)
+//const Event = mongoose.model('Event', EventsSchema)
 
 //exports allows us to use Profile anywhere in the application
 module.exports = Event

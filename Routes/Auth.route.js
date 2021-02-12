@@ -40,8 +40,8 @@ router.post('/login', (req, res) => {
         userData.getUserByEmail(req.body.login).then(user => {
             if (user != null) {
                 console.log("Req pwd "+req.body.password)
-                console.log("Req pwd "+user.passWord)
-                verifyPassword(req.body.password, user.passWord).then(result => {
+                console.log("Req pwd "+user.email)
+                verifyPassword(req.body.password, user.password).then(result => {
                     if (result) {
                         res.json({ message: 'Authentification Succeeded' });
                         // JWT
@@ -59,9 +59,9 @@ router.post('/login', (req, res) => {
         });
     } else {
         // Searching user by Username
-        userData.getUserByUsername(req.body.login.toLowerCase()).then(user => {
+        userData.getUserByUsername(req.body.login).then(user => {
             if (user != null) {
-                verifyPassword(req.body.password, user.password).then(result => {
+                verifyPassword(req.body.password, user.password).then(result => { //Lowercase removed
                     if (result) {
                         res.json({ message: 'Authentification Succeeded' });
                         // JWT

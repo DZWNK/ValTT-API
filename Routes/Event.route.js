@@ -2,25 +2,22 @@ const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
 
-const Match = require('../Modules/Schemas/Match.model')
-const Event = require('../Modules/Schemas/Event.model')
-const Team = require('../Modules/Schemas/Team.model')
-const User = require('../Modules/Schemas/UserSchema')
-const Player = require('../Modules/Schemas/Player.model')
+const Event = require('../Modules/Schemas/EventSchema')
+const eventService = require("../Modules/EventService")
 
+//throw createError.NotFound()
 //Get all the events
-router.get('/events', async(req, res, next) =>{
-    try{
-        const events = await Event.find({}).populate('brackets.matches')
-        .exec((error, events)=>{
-          if(error){
-              throw createError.NotFound()
-          }
-          res.json(events)
-        })
-    }catch(error){
-          next(error)
-    }
+router.get('/events', (req, res, next) =>{
+  eventData.getAllEvents().then((events)=>{
+        if(events != null){
+            res.json(events)
+        }
+        else {
+          res.json({ message: 'Cannot Find Events' });
+      }
+  }).catch((err) => {
+        next(err)
+    });
 })
 
 //Get all running events

@@ -5,7 +5,7 @@ POST http://localhost:5000/auth/login
 Content-Type: application/json
 
 {
-   "username": "mamdinho777@gmail.com",
+   "login": "CatKitty",
    "password": "123rty78"
 }
 
@@ -14,8 +14,8 @@ POST http://localhost:5000/auth/signup
 Content-Type: application/json
 
 {
-   "username": "MOUSElORD",
-   "email": "mousueLo@gmail.com",
+   "username": "CatKitty",
+   "email": "kitty@litty.com",
    "password": "123rty78"
 }
 
