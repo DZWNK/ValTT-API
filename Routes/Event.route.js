@@ -8,7 +8,7 @@ const eventService = require("../Modules/EventService")
 //throw createError.NotFound()
 //Get all the events
 router.get('/events', (req, res, next) =>{
-  eventData.getAllEvents().then((events)=>{
+  userData.getAllEvents().then((events)=>{
         if(events != null){
             res.json(events)
         }

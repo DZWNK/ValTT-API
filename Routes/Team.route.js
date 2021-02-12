@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
 
-const Team = require('../Modules/Schemas/Team.model')
+const Team = require('../Modules/Schemas/TeamSchema')
 
 //get all teams
 router.get('/teams', async(req, res, next) =>{

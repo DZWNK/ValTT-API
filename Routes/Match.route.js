@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
 
-const Match = require('../Modules/Schemas/Match.model')
+const Match = require('../Modules/Schemas/MatchSchema')
 
 router.get('/matches', async(req, res, next) =>{
     try{
