@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const EventsSchema = require('../Modules/Schemas/EventSchema');
+const EventsSchema = require('./Schemas/EventSchema');
 
 module.exports = function(connectionString){
     let Event;
