@@ -5,17 +5,34 @@ POST http://localhost:5000/auth/login
 Content-Type: application/json
 
 {
-   "email": "something@gmail.com",
-   "passWord": "123rty78"
+   "login": "CatKitty",
+   "password": "123rty78"
 }
+
 ###
 POST http://localhost:5000/auth/signup
 Content-Type: application/json
 
 {
-   "email": "something@gmail.com",
-   "passWord": "123rty78"
+   "username": "CatKitty",
+   "email": "kitty@litty.com",
+   "password": "123rty78"
 }
 
 ###
 DELETE http://localhost:5000/auth/logout
+
+###
+GET http://localhost:5000/event/events
+
+###
+GET http://localhost:5000/event/running
+
+###
+GET http://localhost:5000/match/matches
+
+###
+GET http://localhost:5000/team/teams
+
+###
+GET http://localhost:5000/team/team?teamName=Gamer Boys

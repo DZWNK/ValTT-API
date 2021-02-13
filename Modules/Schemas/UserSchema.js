@@ -1,21 +1,32 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
-//Creating schema for Profile (logging in or signing up)
 const profilesSchema = new Schema({
-    email:{
-        type: String,
-        required: true,
-        lowercase: true, //avoids case sensitivity
-        unique: true     //only one email per profile
-    },
-    passWord:{
-        type: String,
-        required: true
-    }
+    playerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Player' },
+    dateCreated: {type: Date},
+    username: {type: String, unique: true, required: true},
+    email: {type: String, required: true},
+    password: {type: String, required: true},
+    favourites: [{type: mongoose.Schema.Types.ObjectId}], //ref to what exactly ??
+    riotId: {type: String},
+    isAdmin: {type: Boolean},
+    isCoach: {type: Boolean},
+    isEventOrganizer: {type: Boolean},
 })
 
+profilesSchema.pre('findOne', function(next) {
+    this.populate('playerId')
+    .populate('favourites');
+    next();
+});
+
+//const User = mongoose.model('User', profilesSchema)
+
+//exports allows us to use User anywhere in the application
+module.exports = profilesSchema
+
+/*
 //fired before mongoose tries to save a profile to database  NOTE: After saving it's .post('save)
 profilesSchema.pre('save' , async function(next){
       try{
@@ -36,8 +47,4 @@ profilesSchema.methods.isValidPassword = async function(passWord){
            throw error
        }
 }
-
-const Profile = mongoose.model('Profile', profilesSchema)
-
-//exports allows us to use Profile anywhere in the application
-module.exports = Profile
+*/
