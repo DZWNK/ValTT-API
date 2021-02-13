@@ -5,7 +5,7 @@ const EventsSchema = require('./Schemas/EventSchema');
 
 module.exports = function(connectionString) {
     let Profile;
-    let Event;
+
     return {
         // Initialize the connection to our MongoDB Database
         initialize: function() {
@@ -22,8 +22,6 @@ module.exports = function(connectionString) {
                     console.log("Database connection established");
                     Profile = db.model("Profile", profileSchema);
                     console.log("Profile Initialized");
-                    Event = db.model("Event", EventsSchema);
-                    console.log("Event Initialized");
                     resolve();
                 });
             });
