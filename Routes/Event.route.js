@@ -8,7 +8,7 @@ const eventService = require("../Modules/EventService")
 //throw createError.NotFound()
 //Get all the events
 router.get('/events', (req, res, next) =>{
-  eventService.getAllEvents().then((events)=>{
+  eventData.getAllEvents().then((events)=>{
         if(events != null){
             res.json(events)
         }
@@ -22,17 +22,15 @@ router.get('/events', (req, res, next) =>{
 
 //Get all running events
 router.get('/running', async(req, res, next) =>{
-      try{
-          const runningEvents = await Event.find({runningStatus: true}).populate('brackets.matches')
-          .exec((error, events)=>{
-            if(error){
-                throw createError.NotFound()
-            }
-            res.json(events)
-          })
-      }catch(error){
-        next(error)
-      }
+  eventData.getRunningEvents().then((runningEvents)=>{
+    if(runningEvents != null){
+        res.json(runningEvents)
+    }else{
+      res.json({ message: 'Cannot Find Running Events' });
+    }
+  }).catch((err) => {
+        next(err)
+    });
 })
 
 
