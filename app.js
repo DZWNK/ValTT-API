@@ -4,7 +4,10 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 require('dotenv').config();
 const userService = require("./Modules/userService");
+const eventService = require("./Modules/EventService");
+
 global.userData = userService("mongodb+srv://userTest:userTest@cluster0.00i4t.mongodb.net/valtt_db?retryWrites=true&w=majority");
+global.eventData = eventService("mongodb+srv://userTest:userTest@cluster0.00i4t.mongodb.net/valtt_db?retryWrites=true&w=majority");
 
 const AuthRoute = require('./Routes/Auth.route')
 const EventRoute = require('./Routes/Event.route')
@@ -59,9 +62,14 @@ app.use((err, req, res, next) =>{
 const PORT = process.env.PORT || 3000;
 
 userData.initialize().then(() => {
-    app.listen(PORT, () => {
-        console.log(`Server running on port: ${PORT}`);
-    });
-}).catch((err) => {
-    console.log(`An error occurred during initialization: ${err}`);
+    eventData.initialize().then(() =>{
+        app.listen(PORT, () => {
+            console.log(`Server running on port: ${PORT}`);
+        });
+    }).catch((err) => {
+    console.log(`An error occurred during event initialization: ${err}`);
 });
+}).catch((err) => {
+    console.log(`An error occurred user during initialization: ${err}`);
+});
+
