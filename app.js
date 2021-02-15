@@ -5,7 +5,7 @@ const morgan = require('morgan');
 require('dotenv').config();
 const userService = require("./Modules/userService");
 const eventService = require("./Modules/EventService");
-
+const cors = require('cors');
 global.userData = userService("mongodb+srv://userTest:userTest@cluster0.00i4t.mongodb.net/valtt_db?retryWrites=true&w=majority");
 global.eventData = eventService("mongodb+srv://userTest:userTest@cluster0.00i4t.mongodb.net/valtt_db?retryWrites=true&w=majority");
 
@@ -27,6 +27,7 @@ process.on('SIGINT', async() => {
 });
 
 const app = express()
+app.use(cors())
 //for logging the requests made to the API
 app.use(morgan('dev'))
 //for parsing request body coming in json format
