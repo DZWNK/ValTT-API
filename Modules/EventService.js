@@ -88,6 +88,21 @@ module.exports = function(connectionString){
                     reject(err);
                 });
             });
+        },
+
+        createEvent: function(event) {
+            return new Promise((resolve, reject) => {
+                let newEvent = new Event(event);
+                console.log(newEvent);
+                newEvent.save(err => {
+                    if (err) {
+                        reject(`Error Saving event in database: ${err}`);
+                    } else {
+                        resolve(`New event added to database: ${user}`);
+                    }
+                });
+                
+            });
         }
     }
 }
