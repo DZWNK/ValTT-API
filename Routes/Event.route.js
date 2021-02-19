@@ -81,7 +81,7 @@ router.post('/newEvent', async(req, res, next) =>{
   eventData.getEventById(req.body.id).then((events)=>{
     if(events[0] == null){
         //do the insert
-        eventData.createEvent(re.body).then((msg) => {
+        eventData.createEvent(req.body).then((msg) => {
           res.json({ message: msg });
       }).catch((err) => {
           res.json({ message: `An error occured adding Event to database: ${err}` });
