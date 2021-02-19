@@ -45,3 +45,11 @@ GET http://localhost:5000/event/event/unverified?page=1&numfetched=10
 
 ###
 GET http://localhost:5000/event/event?id=6016efe0ab5762fee7e18e70
+
+###
+POST http://localhost:5000/event/newEvent
+Content-Type: application/json
+
+{
+   
+}
