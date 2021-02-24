@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const createError = require('http-errors');
 const User = require('../Modules/Schemas/UserSchema');
-
+const jwt = require('jsonwebtoken');
 const userService = require("../Modules/UserService");
 
 
@@ -43,8 +43,10 @@ router.post('/login', (req, res) => {
                 console.log("Req pwd "+user.email)
                 verifyPassword(req.body.password, user.password).then(result => {
                     if (result) {
-                        res.json({ message: 'Authentification Succeeded' });
-                        // JWT
+                        let payload = { subject: user._id };
+                        let token = jwt.sign(payload, 'secretKey');
+                        res.status(200).send({token});
+                       
                     } else {
                         res.json({ message: 'Authentification Failed' });
                     }
@@ -63,8 +65,11 @@ router.post('/login', (req, res) => {
             if (user != null) {
                 verifyPassword(req.body.password, user.password).then(result => { //Lowercase removed
                     if (result) {
-                        res.json({ message: 'Authentification Succeeded' });
+                        
                         // JWT
+                        let payload = { subject: user._id };
+                        let token = jwt.sign(payload, 'secretKey');
+                        res.status(200).send({token});
                     } else {
                         res.json({ message: 'Authentification Failed' });
                     }
@@ -79,6 +84,8 @@ router.post('/login', (req, res) => {
         });
     }
 });
+
+
 
 function verifyPassword(password, hash) {
     return new Promise((resolve, reject) => {
