@@ -36,3 +36,20 @@ GET http://localhost:5000/team/teams
 
 ###
 GET http://localhost:5000/team/team?teamName=Gamer Boys
+
+###
+GET http://localhost:5000/event/event/verified?page=1&numfetched=10
+
+###
+GET http://localhost:5000/event/event/unverified?page=1&numfetched=10
+
+###
+GET http://localhost:5000/event/event?id=6016efe0ab5762fee7e18e70
+
+###
+POST http://localhost:5000/event/newEvent
+Content-Type: application/json
+
+{
+   
+}

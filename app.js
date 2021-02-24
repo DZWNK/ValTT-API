@@ -6,8 +6,11 @@ require('dotenv').config();
 const userService = require("./Modules/userService");
 const eventService = require("./Modules/EventService");
 const cors = require('cors');
+const teamService = require("./Modules/TeamService");
+
 global.userData = userService("mongodb+srv://userTest:userTest@cluster0.00i4t.mongodb.net/valtt_db?retryWrites=true&w=majority");
 global.eventData = eventService("mongodb+srv://userTest:userTest@cluster0.00i4t.mongodb.net/valtt_db?retryWrites=true&w=majority");
+global.teamData = teamService("mongodb+srv://userTest:userTest@cluster0.00i4t.mongodb.net/valtt_db?retryWrites=true&w=majority");
 
 const AuthRoute = require('./Routes/Auth.route')
 const EventRoute = require('./Routes/Event.route')
@@ -20,7 +23,7 @@ mongoose.connection.on('disconnected', () => {
 mongoose.connection.on('close', () => {
     console.log('Mongoose connection closed');
 });
-process.on('SIGINT', async() => {
+process.on('SIGINT', async () => {
     console.log("[Ctrl+C] Presed: Closing Mongoose Connections");
     await mongoose.connection.close();
     process.exit(0);
@@ -33,9 +36,9 @@ app.use(morgan('dev'))
 //for parsing request body coming in json format
 app.use(express.json())
 //for handling form data
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 
-app.get('/' , async(req, res, next) =>{
+app.get('/', async (req, res, next) => {
     res.send("Hello from express.")
 })
 
@@ -46,12 +49,12 @@ app.use('/match', MatchRoute)
 app.use('/team', TeamRoute)
 
 //for handling any non-existing routes
-app.use(async(req, res, next) =>{
-     next(createError.NotFound('This route does not exist'))
+app.use(async (req, res, next) => {
+    next(createError.NotFound('This route does not exist'))
 })
 
 //method below triggered whenever next(error) is called
-app.use((err, req, res, next) =>{
+app.use((err, req, res, next) => {
     res.status(err.status || 500)
     res.send({
         error: {
@@ -63,13 +66,17 @@ app.use((err, req, res, next) =>{
 const PORT = process.env.PORT || 3000;
 
 userData.initialize().then(() => {
-    eventData.initialize().then(() =>{
-        app.listen(PORT, () => {
-            console.log(`Server running on port: ${PORT}`);
+    eventData.initialize().then(() => {
+        teamData.initialize().then(() => {
+            app.listen(PORT, () => {
+                console.log(`Server running on port: ${PORT}`);
+            });
+        }).catch((err) => {
+            console.log(`An error occurred during team initialization: ${err}`);
         });
     }).catch((err) => {
-    console.log(`An error occurred during event initialization: ${err}`);
-});
+        console.log(`An error occurred during event initialization: ${err}`);
+    });
 }).catch((err) => {
     console.log(`An error occurred user during initialization: ${err}`);
 });

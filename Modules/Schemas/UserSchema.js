@@ -21,9 +21,10 @@ profilesSchema.pre('findOne', function(next) {
     next();
 });
 
-//const User = mongoose.model('User', profilesSchema)
+const Profile = mongoose.model('User', profilesSchema)
 
 //exports allows us to use User anywhere in the application
+module.exports = Profile
 module.exports = profilesSchema
 
 /*
