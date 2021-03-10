@@ -40,7 +40,7 @@ module.exports = function(connectionString){
             });
         },
 
-                // Get user in database by Username
+        // Get user in database by Username
         getTeamByName: function(data) {
             return new Promise((resolve, reject) => {
                 console.log(`Finding team by team name: ${data}`);

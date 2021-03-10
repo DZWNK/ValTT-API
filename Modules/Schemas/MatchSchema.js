@@ -80,3 +80,4 @@ const Match = mongoose.model('Match', matchesSchema)
 
 //exports allows us to use Profile anywhere in the application
 module.exports = Match
+module.exports = matchesSchema

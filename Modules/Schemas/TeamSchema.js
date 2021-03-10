@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const teamsSchema = new Schema({
     teamPic: {type: String},  //urls will need to be verified
     website: {type: String},
-    CoachId: { type: mongoose.Schema.Types.ObjectId, ref: 'Profile' },
+    CoachId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     teamName: {type: String, unique: true},
     dateCreated: {type: Date, default: Date.now},
     activeStatus: {type: Boolean},
@@ -25,7 +25,8 @@ teamsSchema.pre('findOne', function(next) {
     next();
 });
  
-//const Team = mongoose.model('Team', teamsSchema)
+const Team = mongoose.model('Team', teamsSchema)
 
 //exports allows us to use User anywhere in the application
+module.exports = Team
 module.exports = teamsSchema

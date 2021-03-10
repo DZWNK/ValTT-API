@@ -19,7 +19,8 @@ playersSchema.pre('findOne', function(next) {
     next();
 });
 
-//const Player = mongoose.model('Player', playersSchema)
+const Player = mongoose.model('Player', playersSchema)
 
 //exports allows us to use Profile anywhere in the application
+module.exports = Player
 module.exports = playersSchema
