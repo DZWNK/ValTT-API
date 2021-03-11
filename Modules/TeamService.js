@@ -50,6 +50,17 @@ module.exports = function(connectionString){
                     reject(err);
                 });
             });
+        },
+
+        getTeamById: function(id) {
+            return new Promise((resolve, reject) => {
+                console.log(`Finding team by team name: ${data}`);
+                Profile.findOne({ _id: id }).exec().then(team => {
+                    resolve(team);
+                }).catch(err => {
+                    reject(err);
+                });
+            });
         }
     }
 }
