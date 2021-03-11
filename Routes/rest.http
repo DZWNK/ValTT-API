@@ -30,7 +30,19 @@ GET http://localhost:5000/event/running
 
 ###
 GET http://localhost:5000/match/matches
+Content-Type: application/json
 
+{
+   "ids": ["6016eb3cab5762fee7e18e65", "6016eb3cab5762fee7e18e63"]
+}
+
+###
+GET http://localhost:5000/match/match
+Content-Type: application/json
+
+{
+   "id": "6016eb3cab5762fee7e18e65"
+}
 ###
 GET http://localhost:5000/team/teams
 
