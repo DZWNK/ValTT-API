@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 require('dotenv').config();
-const userService = require("./Modules/userService");
+const userService = require("./Modules/UserService");
 const eventService = require("./Modules/EventService");
 const cors = require('cors');
 const teamService = require("./Modules/TeamService");
