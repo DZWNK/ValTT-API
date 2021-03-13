@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const profileSchema = require("./Schemas/UserSchema");
-const EventsSchema = require('./Schemas/EventSchema');
+
 
 module.exports = function(connectionString) {
     let Profile;
@@ -20,7 +20,7 @@ module.exports = function(connectionString) {
                 });
                 db.once('open', () => {
                     console.log("Database connection established");
-                    Profile = db.model("Profile", profileSchema);
+                    Profile = db.model("User", profileSchema);
                     console.log("Profile Initialized");
                     resolve();
                 });

@@ -4,24 +4,28 @@ const createError = require('http-errors')
 
 const Match = require('../Modules/Schemas/MatchSchema')
 
-router.get('/matches', async(req, res, next) =>{
-    try{
-        const matches = await Match.find({}).populate('event')
-        .populate('teams.team')
-        .populate('games.rounds.planter')
-        .populate('games.rounds.defuser')
-        .populate('games.rounds.teams')
-        .populate('games.rounds.kills.victim')
-        .exec((err, matches) =>{
-            if(err){
-                throw createError.NotFound('Matches Not Found from database')
-            }
-            console.log(matches) //for debug purposes
-            res.json(matches) //send back the events in json format 
-        })
-    }catch(error){
-          next(error)
-    }
+router.get('/matches', (req, res, next) => {
+    matchData.getMatchesById(req.body.ids).then((matches) => {
+        if (matches[0] != null) {
+            res.json(matches)
+        } else {
+            res.json({ message: `No matches found for provided id ${req.body.ids} available`});
+        }
+    }).catch((err) => {
+        next(err)
+    });
+})
+
+router.get('/match', (req, res, next) => {
+    matchData.getMatchById(req.body.id).then((match) => {
+        if (match[0] != null) {
+            res.json(match)
+        } else {
+            res.json({ message: `No Match found with id ${req.body.id} available`});
+        }
+    }).catch((err) => {
+        next(err)
+    });
 })
 
 module.exports = router
