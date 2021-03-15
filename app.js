@@ -67,15 +67,15 @@ app.use((err, req, res, next) => {
         }
     })
 })
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 userData.initialize().then(() => {
     eventData.initialize().then(() => {
         teamData.initialize().then(() => {
             playerData.initialize().then(() => {
                 matchData.initialize().then(() =>{
-                    app.listen(PORT, () => {
-                        console.log(`Server running on port: ${PORT}`);
+                    app.listen(port, () => {
+                        console.log(`Server running on port: ${port}`);
                     });
                 }).catch((err) => {
                 console.log(`An error occurred during Match initialization: ${err}`);
