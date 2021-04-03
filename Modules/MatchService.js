@@ -30,7 +30,6 @@ module.exports = function (connectionString) {
             return new Promise((resolve, reject) => {
                 console.log(`Fetching match by Id`);
                 Match.find({ _id: id }).populate('event')
-                    .populate('teams.team')
                     .populate('games.rounds.planter')
                     .populate('games.rounds.defuser')
                     .populate('games.rounds.teams')
@@ -46,7 +45,6 @@ module.exports = function (connectionString) {
             return new Promise((resolve, reject) => {
                 console.log(`Fetching match by Id`);
                 Match.find({ _id: { $in: ids } }).populate('event')
-                    .populate('teams.team')
                     .populate('games.rounds.planter')
                     .populate('games.rounds.defuser')
                     .populate('games.rounds.teams')

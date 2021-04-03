@@ -29,7 +29,7 @@ module.exports = function(connectionString){
         getAllEvents: function() {
             return new Promise((resolve, reject) => {
                 console.log(`Fetching all events`);
-                Event.find({}).populate('brackets.matches').exec().then(events => {
+                Event.find({}).exec().then(events => {
                     resolve(events);
                 }).catch(err => {
                     reject(err);
@@ -45,7 +45,7 @@ module.exports = function(connectionString){
                 }else{
                     pageNum = (pageNum*10) - 1;
                 }
-                Event.find({verified: true}).populate('brackets.matches').skip(pageNum).limit(numFetched).exec().then(events => {
+                Event.find({verified: true}).skip(pageNum).limit(numFetched).exec().then(events => {
                     resolve(events);
                 }).catch(err => {
                     reject(err);
@@ -61,7 +61,7 @@ module.exports = function(connectionString){
                 }else{
                     pageNum = (pageNum*10) - 1;
                 }
-                Event.find({verified: false}).populate('brackets.matches').skip(pageNum).limit(numFetched).exec().then(events => {
+                Event.find({verified: false}).skip(pageNum).limit(numFetched).exec().then(events => {
                     resolve(events);
                 }).catch(err => {
                     reject(err);
@@ -72,7 +72,7 @@ module.exports = function(connectionString){
         getEventById: function(id) {
             return new Promise((resolve, reject) => {
                 console.log(`Fetching event by Id`);
-                Event.find({_id: id}).populate('brackets.matches').exec().then(events => {
+                Event.find({_id: id}).exec().then(events => {
                     resolve(events);
                 }).catch(err => {
                     reject(err);
@@ -82,7 +82,7 @@ module.exports = function(connectionString){
 
         getRunningEvents: function() {
             return new Promise((resolve, reject) => {
-                Event.find({runningStatus: true}).populate('brackets.matches').exec().then(events => {
+                Event.find({runningStatus: true}).exec().then(events => {
                     resolve(events);
                 }).catch(err => {
                     reject(err);
