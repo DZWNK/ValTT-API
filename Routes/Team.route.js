@@ -33,4 +33,17 @@ router.get('/team', (req, res, next) => {
     });
 })
 
+router.get('/verified', (req, res, next) => {
+    teamData.getVerifiedTeams().then(teams => {
+        if (teams[0] != null) {
+            res.json(teams)
+        }
+        else {
+            res.json({ message: `No verified Teams available` });
+        }
+    }).catch((err) => {
+        next(err)
+    });
+})
+
 module.exports = router

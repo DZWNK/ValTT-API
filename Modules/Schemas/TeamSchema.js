@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 
 const teamsSchema = new Schema({
     teamPic: {type: String},
+    verified: {type: Boolean},
     website: {type: String},
     CoachId: { //Player Preview
         id: {type: String},
