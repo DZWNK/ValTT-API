@@ -46,7 +46,6 @@ module.exports = function(connectionString){
                     pageNum = (pageNum*10) - 1;
                 }
                 Event.find({verified: true}).skip(pageNum).limit(numFetched).exec().then(events => {
-                    var index = 0;
                     var eventPreview = [{
                         id: String,
                         name: String,
@@ -55,12 +54,14 @@ module.exports = function(connectionString){
                         endDate: Date
                       }];
                       events.forEach(e => {
-                        eventPreview[index].id = e._id;
-                        eventPreview[index].name = e.name;
-                        eventPreview[index].runningStatus = e.runningStatus;
-                        eventPreview[index].endDate = e.endDate;
-
-                        index++; //increment counter
+                          let event ={
+                            id: e._id,
+                            name: e.name,
+                            runningStatus: e.runningStatus,
+                            startDate: e.startDate,
+                            endDate: e.endDate
+                          };
+                        eventPreview.push(event);
                       });
                     resolve(eventPreview);
                 }).catch(err => {
