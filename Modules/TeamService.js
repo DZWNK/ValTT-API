@@ -28,11 +28,7 @@ module.exports = function(connectionString){
         getAllTeams: function() {
             return new Promise((resolve, reject) => {
                 console.log(`Fetching all teams`);
-                Team.find({}).populate('CoachId')
-                .populate('currentRoster')
-                .populate('upcomingMatches')
-                .populate('pastMatches')
-                .populate('eventHistory').exec().then(teams => {
+                Team.find({}).exec().then(teams => {
                     resolve(teams);
                 }).catch(err => {
                     reject(err);
@@ -64,3 +60,11 @@ module.exports = function(connectionString){
         }
     }
 }
+
+/*
+.populate('CoachId')
+                .populate('currentRoster')
+                .populate('upcomingMatches')
+                .populate('pastMatches')
+                .populate('eventHistory')
+                */
