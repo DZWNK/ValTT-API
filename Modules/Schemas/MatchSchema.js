@@ -8,14 +8,14 @@ const matchesSchema = new Schema({
     loser: {type: String},
     winsNeeded: {type: Number},
     timePlayed: {type: Date, default: Date.now},
-    teams: [{
-        team: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
-        wins: {type: Number},
-        loses: {type: Number}
+    teams: [{ //Team Preview
+        id: {type: String}, //needs to be a reference to team object Id
+        name: {type: String},
+        activeStatus: {type: Boolean}
     }],
     dateCreated: {type: Date, default: Date.now},
     activeStatus: {type: Boolean},
-    games: [{
+    games: [{ //Game Preview
         score: {type: String},
 		mapName: {type: String},
 		status: {type: String},
@@ -67,7 +67,6 @@ const matchesSchema = new Schema({
 
 matchesSchema.pre('findOne', function(next) {
     this.populate('event')
-    .populate('teams.team')
     .populate('games.rounds.planter')
     .populate('games.rounds.defuser')
     .populate('games.rounds.teams')
@@ -81,3 +80,5 @@ const Match = mongoose.model('Match', matchesSchema)
 //exports allows us to use Profile anywhere in the application
 module.exports = Match
 module.exports = matchesSchema
+
+//try object.id as a reference

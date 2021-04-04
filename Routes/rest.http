@@ -47,6 +47,9 @@ Content-Type: application/json
 GET http://localhost:5000/team/teams
 
 ###
+GET http://localhost:5000/team/verified
+
+###
 GET http://localhost:5000/team/team?teamName=Gamer Boys
 
 ###

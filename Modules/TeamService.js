@@ -28,11 +28,7 @@ module.exports = function(connectionString){
         getAllTeams: function() {
             return new Promise((resolve, reject) => {
                 console.log(`Fetching all teams`);
-                Team.find({}).populate('CoachId')
-                .populate('currentRoster')
-                .populate('upcomingMatches')
-                .populate('pastMatches')
-                .populate('eventHistory').exec().then(teams => {
+                Team.find({}).exec().then(teams => {
                     resolve(teams);
                 }).catch(err => {
                     reject(err);
@@ -40,11 +36,11 @@ module.exports = function(connectionString){
             });
         },
 
-        // Get user in database by Username
+        // Get team in database by Username
         getTeamByName: function(data) {
             return new Promise((resolve, reject) => {
                 console.log(`Finding team by team name: ${data}`);
-                Profile.findOne({ teamName: data }).exec().then(team => {
+                Team.findOne({ teamName: data }).exec().then(team => {
                     resolve(team);
                 }).catch(err => {
                     reject(err);
@@ -55,12 +51,46 @@ module.exports = function(connectionString){
         getTeamById: function(id) {
             return new Promise((resolve, reject) => {
                 console.log(`Finding team by team name: ${data}`);
-                Profile.findOne({ _id: id }).exec().then(team => {
+                Team.findOne({ _id: id }).exec().then(team => {
                     resolve(team);
+                }).catch(err => {
+                    reject(err);
+                });
+            });
+        },
+
+        getVerifiedTeams: function() {
+            return new Promise((resolve, reject) => {
+                console.log(`Finding team by verified status`);
+                Team.find({ verified: true }).exec().then(teams => {
+                    var teamPreview = [{
+                        id: String,
+                        name: String,
+                        activeStatus: Boolean
+                      }];
+
+                      for(var i=0; i<teams.length; i++) {
+                          let team = {
+                            id: teams[i]._id,
+                            name: teams[i].teamName,
+                            activeStatus: teams[i].activeStatus
+                          };
+                        teamPreview.push(team);
+                      }
+                    resolve(teamPreview);
                 }).catch(err => {
                     reject(err);
                 });
             });
         }
     }
-}
+    }
+
+
+/*
+.populate('CoachId')
+                .populate('currentRoster')
+                .populate('upcomingMatches')
+                .populate('pastMatches')
+                .populate('eventHistory')
+                */

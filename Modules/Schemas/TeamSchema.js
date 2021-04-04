@@ -3,25 +3,73 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const teamsSchema = new Schema({
-    teamPic: {type: String},  //urls will need to be verified
+    teamPic: {type: String},
+    verified: {type: Boolean},
     website: {type: String},
-    CoachId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    CoachId: { //Player Preview
+        id: {type: String},
+        name: {type: String},
+        team: {
+            id: {type: String}, //needs to be a reference to team object Id
+            name: {type: String},
+            activeStatus: {type: Boolean}
+        }
+    },  //{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }
     teamName: {type: String, unique: true},
     dateCreated: {type: Date, default: Date.now},
     activeStatus: {type: Boolean},
-    currentRoster: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }],
-    upcomingMatches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Match' }],
-    pastMatches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Match' }],
+    currentRoster: [{ //Player Preview
+        id: {type: String},
+        name: {type: String},
+        team: {
+            id: {type: String}, //needs to be a reference to team object Id
+            name: {type: String},
+            activeStatus: {type: Boolean}
+        }
+    }],
+    upcomingMatches: [
+        { //Match Preview
+            id: {type: String},
+            teams: [{ //Team preview
+                id: {type: String}, //needs to be a reference to team object Id
+                name: {type: String},
+                activeStatus: {type: Boolean}
+            }],
+            score: {type: String},
+            winner: {type: String},
+            loser: {type: String},
+            activeStatus: {type: Boolean},
+            timePlayed: {type: Date, default: Date.now},
+            winsNeeded: {type: Number}
+         }
+    ],
+    pastMatches: [
+        { //Match Preview
+            id: {type: String},
+            teams: [{ //Team preview
+                id: {type: String}, //needs to be a reference to team object Id
+                name: {type: String},
+                activeStatus: {type: Boolean}
+            }],
+            score: {type: String},
+            winner: {type: String},
+            loser: {type: String},
+            activeStatus: {type: Boolean},
+            timePlayed: {type: Date, default: Date.now},
+            winsNeeded: {type: Number}
+         }
+    ],
     extraMatches: {type: Boolean},
-    eventHistory: { type: mongoose.Schema.Types.ObjectId, ref: 'Event' }
+    eventHistory: { 
+        id: {type: String},
+        name: {type: String},
+        runningStatus: {type: Boolean},
+        startDate: {type: Date, default: Date.now},
+        endDate: {type: Date, default: Date.now}
+     }
 })
 
 teamsSchema.pre('findOne', function(next) {
-    this.populate('CoachId')
-    .populate('currentRoster')
-    .populate('upcomingMatches')
-    .populate('pastMatches')
-    .populate('eventHistory');
     next();
 });
  
@@ -30,3 +78,10 @@ const Team = mongoose.model('Team', teamsSchema)
 //exports allows us to use User anywhere in the application
 module.exports = Team
 module.exports = teamsSchema
+
+/*
+    .populate('currentRoster')
+    .populate('upcomingMatches')
+    .populate('pastMatches')
+    .populate('eventHistory');
+*/
