@@ -46,7 +46,23 @@ module.exports = function(connectionString){
                     pageNum = (pageNum*10) - 1;
                 }
                 Event.find({verified: true}).skip(pageNum).limit(numFetched).exec().then(events => {
-                    resolve(events);
+                    var index = 0;
+                    var eventPreview = [{
+                        id: String,
+                        name: String,
+                        runningStatus: Boolean,
+                        startDate: Date,
+                        endDate: Date
+                      }];
+                      events.forEach(e => {
+                        eventPreview[index].id = e._id;
+                        eventPreview[index].name = e.name;
+                        eventPreview[index].runningStatus = e.runningStatus;
+                        eventPreview[index].endDate = e.endDate;
+
+                        index++; //increment counter
+                      });
+                    resolve(eventPreview);
                 }).catch(err => {
                     reject(err);
                 });
@@ -62,7 +78,23 @@ module.exports = function(connectionString){
                     pageNum = (pageNum*10) - 1;
                 }
                 Event.find({verified: false}).skip(pageNum).limit(numFetched).exec().then(events => {
-                    resolve(events);
+                    var index = 0;
+                    var eventPreview = [{
+                        id: String,
+                        name: String,
+                        runningStatus: Boolean,
+                        startDate: Date,
+                        endDate: Date
+                      }];
+                      events.forEach(e => {
+                        eventPreview[index].id = e._id;
+                        eventPreview[index].name = e.name;
+                        eventPreview[index].runningStatus = e.runningStatus;
+                        eventPreview[index].endDate = e.endDate;
+
+                        index++; //increment counter
+                      });
+                    resolve(eventPreview);
                 }).catch(err => {
                     reject(err);
                 });

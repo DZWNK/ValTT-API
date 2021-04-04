@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const EventsSchema = new Schema({
     runningStatus: {type: Boolean},
+    name: {type: String},
     dateCreated: {type: Date, default: Date.now},
     startDate: {type: Date},
     endDate: {type: Date},
@@ -50,51 +51,3 @@ const Event = mongoose.model('Event', EventsSchema)
 //exports allows us to use Profile anywhere in the application
 module.exports = Event
 module.exports = EventsSchema
-
-
-/*
-class EventPreview{
-	id: string;
-    name: string;
-    runningStatus: boolean;
-	startDate: Date;
-	endDate: Date;
-}
-class Event{
-	id: string;
-	runningStatus: boolean;
-	dateCreated: Date;
-	startDate: Date;
-	endDate: Date;
-	watchLink: string;
-	verified: boolean;
-	featured: boolean;
-	winner: number;
-	teams: [TeamPreview];
-	brackets: [{
-		name: string;
-		pushPerMatch: boolean;
-		pushWinner: boolean;
-		pushLoser: number;
-		matchesPlayed: number;
-		matches: [{
-			match: MatchPreview; 
-			prize: string;
-		}];
-	}
-}*/
-
-//matches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Match' }] //array of match objects
-
-/* 
-class MatchPreview{
-	id: string;
-	teams: [TeamPreview]; // Embed object do NOT reference to object
-	score: [number];
-	winner: number;
-	loser: number;
-	activeStatus: boolean;
-	timePlayed: Date;
-	winsNeeded: number;
-}
-*/
