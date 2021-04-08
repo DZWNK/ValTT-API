@@ -49,7 +49,7 @@ router.get('/running', async(req, res, next) =>{
 })
 
 ///GET verified events
-router.get('/event/verified', async(req, res, next) =>{
+router.get('/verified', async(req, res, next) =>{
 
   eventData.getVerifiedFirstEvents(parseInt(req.query.page), parseInt(req.query.numfetched)).then((events)=>{
     if(events[0] != null){
@@ -62,8 +62,22 @@ router.get('/event/verified', async(req, res, next) =>{
     });
 })
 
+///GET featured events
+router.get('/featured', async(req, res, next) =>{
+
+  eventData.getFeaturedEvents(parseInt(req.query.page), parseInt(req.query.numfetched)).then((events)=>{
+    if(events[0] != null){
+        res.json(events)
+    }else{
+      res.json({ message: 'No featured Events available' });
+    }
+  }).catch((err) => {
+        next(err)
+    });
+})
+
 //GET unverified events
-router.get('/event/unverified', async(req, res, next) =>{
+router.get('/unverified', async(req, res, next) =>{
 
   eventData.getUnverifiedFirstEvents(parseInt(req.query.page), parseInt(req.query.numfetched)).then((events)=>{
     if(events[0] != null){

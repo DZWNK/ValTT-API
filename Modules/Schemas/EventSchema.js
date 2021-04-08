@@ -35,7 +35,8 @@ const EventsSchema = new Schema({
                 activeStatus: {type: Boolean},
                 timePlayed: {type: Date, default: Date.now},
                 winsNeeded: {type: Number}
-             }
+             },
+             prize: {type: String}
         }]
     }]
 })
