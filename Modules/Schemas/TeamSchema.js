@@ -40,7 +40,8 @@ const teamsSchema = new Schema({
             loser: {type: String},
             activeStatus: {type: Boolean},
             timePlayed: {type: Date, default: Date.now},
-            winsNeeded: {type: Number}
+            winsNeeded: {type: Number},
+            prize: {type: String}
          }
     ],
     pastMatches: [

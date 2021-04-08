@@ -42,8 +42,6 @@ module.exports = function(connectionString){
                 console.log(`Fetching paged verified events`);
                 if(pageNum == 1){
                     pageNum = 0;
-                }else{
-                    pageNum = (pageNum*10) - 1;
                 }
                 Event.find({verified: true}).skip(pageNum).limit(numFetched).exec().then(events => {
                     var eventPreview = [{
@@ -53,6 +51,39 @@ module.exports = function(connectionString){
                         startDate: Date,
                         endDate: Date
                       }];
+                      eventPreview.length = 0;
+                      events.forEach(e => {
+                          let event ={
+                            id: e._id,
+                            name: e.name,
+                            runningStatus: e.runningStatus,
+                            startDate: e.startDate,
+                            endDate: e.endDate
+                          };
+                            eventPreview.push(event);                    
+                      });
+                    resolve(eventPreview);
+                }).catch(err => {
+                    reject(err);
+                });
+            });
+        },
+
+        getUnverifiedFirstEvents: function(pageNum, numFetched) {
+            return new Promise((resolve, reject) => {
+                console.log(`Fetching paged unverified events`);
+                if(pageNum == 1){
+                    pageNum = 0;
+                }
+                Event.find({verified: false}).skip(pageNum).limit(numFetched).exec().then(events => {
+                    var eventPreview = [{
+                        id: String,
+                        name: String,
+                        runningStatus: Boolean,
+                        startDate: Date,
+                        endDate: Date
+                      }];
+                      eventPreview.length = 0;
                       events.forEach(e => {
                           let event ={
                             id: e._id,
@@ -70,16 +101,14 @@ module.exports = function(connectionString){
             });
         },
 
-        getUnverifiedFirstEvents: function(pageNum, numFetched) {
+
+        getFeaturedEvents: function(pageNum, numFetched) {
             return new Promise((resolve, reject) => {
                 console.log(`Fetching paged unverified events`);
                 if(pageNum == 1){
                     pageNum = 0;
-                }else{
-                    pageNum = (pageNum*10) - 1;
                 }
-                Event.find({verified: false}).skip(pageNum).limit(numFetched).exec().then(events => {
-                    var index = 0;
+                Event.find({featured: true}).skip(pageNum).limit(numFetched).exec().then(events => {
                     var eventPreview = [{
                         id: String,
                         name: String,
@@ -87,13 +116,16 @@ module.exports = function(connectionString){
                         startDate: Date,
                         endDate: Date
                       }];
+                      eventPreview.length = 0;
                       events.forEach(e => {
-                        eventPreview[index].id = e._id;
-                        eventPreview[index].name = e.name;
-                        eventPreview[index].runningStatus = e.runningStatus;
-                        eventPreview[index].endDate = e.endDate;
-
-                        index++; //increment counter
+                          let event ={
+                            id: e._id,
+                            name: e.name,
+                            runningStatus: e.runningStatus,
+                            startDate: e.startDate,
+                            endDate: e.endDate
+                          };
+                        eventPreview.push(event);
                       });
                     resolve(eventPreview);
                 }).catch(err => {
@@ -105,7 +137,7 @@ module.exports = function(connectionString){
         getEventById: function(id) {
             return new Promise((resolve, reject) => {
                 console.log(`Fetching event by Id`);
-                Event.find({_id: id}).exec().then(events => {
+                Event.findOne({_id: id}).exec().then(events => {
                     resolve(events);
                 }).catch(err => {
                     reject(err);
