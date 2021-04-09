@@ -68,7 +68,7 @@ module.exports = function(connectionString){
                         name: String,
                         activeStatus: Boolean
                       }];
-
+                      teamPreview.length = 0;
                       for(var i=0; i<teams.length; i++) {
                           let team = {
                             id: teams[i]._id,

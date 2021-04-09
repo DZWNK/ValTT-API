@@ -137,7 +137,7 @@ module.exports = function(connectionString){
         getEventById: function(id) {
             return new Promise((resolve, reject) => {
                 console.log(`Fetching event by Id`);
-                Event.findOne({_id: id}).exec().then(events => {
+                Event.find({_id: id}).exec().then(events => {
                     resolve(events);
                 }).catch(err => {
                     reject(err);

@@ -95,7 +95,7 @@ router.get('/event', async(req, res, next) =>{
 
   eventData.getEventById(req.query.id).then((events)=>{
     if(events[0] != null){
-        res.json(events)
+        res.json(events[0])
     }else{
       res.json({ message: `No Event with specified Id ${req.query.id} available` });
     }
