@@ -163,10 +163,9 @@ module.exports = function(connectionString){
                     if (err) {
                         reject(`Error Saving event in database: ${err}`);
                     } else {
-                        resolve(`New event added to database: ${user}`);
+                        resolve(`New event added to database`);
                     }
-                });
-                
+                });           
             });
         }
     }

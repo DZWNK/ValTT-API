@@ -46,4 +46,22 @@ router.get('/verified', (req, res, next) => {
     });
 })
 
+router.post('/newTeam', async(req, res, next) =>{
+
+    teamData.getTeamById(req.body.id).then((teams)=>{
+      if(teams[0] == null){
+          //do the insert
+          teamData.addNewTeam(req.body).then((msg) => {
+            res.json({ message: msg });
+        }).catch((err) => {
+            res.json({ message: `An error occured adding Team to database: ${err}` });
+        });
+      }else{
+        res.json({ message: `Team already exists in Database` });
+      }
+    }).catch((err) => {
+          next(err)
+      });
+  })
+
 module.exports = router

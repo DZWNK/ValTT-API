@@ -51,7 +51,7 @@ module.exports = function(connectionString){
         getTeamById: function(id) {
             return new Promise((resolve, reject) => {
                 console.log(`Finding team by team name: ${data}`);
-                Team.findOne({ _id: id }).exec().then(team => {
+                Team.find({ _id: id }).exec().then(team => {
                     resolve(team);
                 }).catch(err => {
                     reject(err);
@@ -82,15 +82,21 @@ module.exports = function(connectionString){
                     reject(err);
                 });
             });
-        }
+        },
+
+        addNewTeam: function(newTeam){
+            return new Promise((resolve, reject) => {
+                let team = new Event(newTeam);
+                console.log(newEvent);
+                team.save(err => {
+                    if (err) {
+                        reject(`Error Saving event in database: ${err}`);
+                    } else {
+                        resolve(`New event added to database`);
+                    }
+                });  
+            });
     }
     }
+}
 
-
-/*
-.populate('CoachId')
-                .populate('currentRoster')
-                .populate('upcomingMatches')
-                .populate('pastMatches')
-                .populate('eventHistory')
-                */

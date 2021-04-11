@@ -65,9 +65,63 @@ GET http://localhost:5000/event/unverified?page=1&numfetched=10
 GET http://localhost:5000/event/event?id=6016efe0ab5762fee7e18e70
 
 ###
-POST http://localhost:5000/event/newEvent
+POST http://localhost:5000/team/newTeam
 Content-Type: application/json
 
 {
    
+}
+
+###
+POST http://localhost:5000/event/newEvent
+Content-Type: application/json
+
+{
+   "runningStatus": true,
+   "dateCreated": "2021-01-27T05:00:00.000+00:00",
+   "startDate": "2021-02-01T05:00:00.000+00:00",
+   "endDate": "2021-02-27T05:00:00.000+00:00",
+   "watchLink" : "",
+   "verified" : true,
+   "featured": true,
+   "brackets" : [{
+        "BracketName": "Bracket 12",
+        "PushPerMatch": true,
+        "PushWinner": 1,
+        "PushLoser": 1,
+        "matches": [{
+           "match":{
+               "teams": [{
+               "id": "6016e68aab5762fee7e18e51",
+               "name": "Gamer Boys",
+               "activeStatus": true
+           },
+           {
+               "id": "6016e9a5ab5762fee7e18e59",
+               "name": "Faze Clan",
+               "activeStatus": true
+           }
+           ],
+           "score": "3-5",
+           "winner": 1,
+            "loser": 2,
+            "winsNeeded": 4,
+            "timePlayed": "2021-04-01T04:00:00.000+00:00",
+            "id": "2021-04-01T04:00:00.000+00:00"
+           },
+           "prize": "$90000"
+        }]
+   }],
+   "teams": [{
+               "id": "6016e68aab5762fee7e18e51",
+               "name": "Gamer Boys",
+               "activeStatus": true
+           },
+           {
+               "id": "6016e9a5ab5762fee7e18e59",
+               "name": "Faze Clan",
+               "activeStatus": true
+           }
+           ],
+   "name": "Major Leagues V2"
 }
