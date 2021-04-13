@@ -62,6 +62,9 @@ GET http://localhost:5000/event/featured?page=1&numfetched=10
 GET http://localhost:5000/event/unverified?page=1&numfetched=10
 
 ###
+GET http://localhost:5000/match/match?id=6016eb3cab5762fee7e18e65
+
+###
 GET http://localhost:5000/event/event?id=6016efe0ab5762fee7e18e70
 
 ###

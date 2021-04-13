@@ -17,7 +17,7 @@ router.get('/matches', (req, res, next) => {
 })
 
 router.get('/match', (req, res, next) => {
-    matchData.getMatchById(req.body.id).then((match) => {
+    matchData.getMatchById(req.query.id).then((match) => {
         if (match[0] != null) {
             res.json(match[0])
         } else {
