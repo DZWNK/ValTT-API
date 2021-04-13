@@ -23,6 +23,20 @@ module.exports = function(connectionString){
                     resolve();
                 });
             });
+        },
+
+        getPlayerById: function (id) {
+            return new Promise((resolve, reject) => {
+                console.log(`Fetching player by Id`);
+                Player.find({ _id: id })
+                .populate('userId')
+                .populate('team')
+                .populate('matches').exec().then(player => {
+                        resolve(player);
+                    }).catch(err => {
+                        reject(err);
+                    });
+            });
         }
     }
 }

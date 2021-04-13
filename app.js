@@ -20,6 +20,7 @@ const AuthRoute = require('./Routes/Auth.route')
 const EventRoute = require('./Routes/Event.route')
 const MatchRoute = require('./Routes/Match.route')
 const TeamRoute = require('./Routes/Team.route')
+const PlayerRoute = require('./Routes/Player.route')
 
 mongoose.connection.on('disconnected', () => {
     console.log('Mongoose connection disconnected uxepectedly');
@@ -51,6 +52,7 @@ app.use('/auth', AuthRoute)
 app.use('/event', EventRoute)
 app.use('/match', MatchRoute)
 app.use('/team', TeamRoute)
+app.use('/player', PlayerRoute)
 
 //for handling any non-existing routes
 app.use(async (req, res, next) => {
