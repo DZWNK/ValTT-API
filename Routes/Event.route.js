@@ -106,21 +106,13 @@ router.get('/event', async(req, res, next) =>{
 
 //POST for creating new Event
 router.post('/newEvent', async(req, res, next) =>{
-
-  eventData.getEventById(req.body.id).then((events)=>{
-    if(events[0] == null){
         //do the insert
         eventData.createEvent(req.body).then((msg) => {
           res.json({ message: msg });
       }).catch((err) => {
           res.json({ message: `An error occured adding Event to database: ${err}` });
       });
-    }else{
-      res.json({ message: `Event already exists in Database` });
-    }
-  }).catch((err) => {
-        next(err)
-    });
+
 })
 
 module.exports = router

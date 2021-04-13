@@ -69,6 +69,7 @@ GET http://localhost:5000/event/event?id=6016efe0ab5762fee7e18e70
 
 ###
 GET http://localhost:5000/player/player?id=6016e4b4ab5762fee7e18e4b
+
 ###
 POST http://localhost:5000/team/newTeam
 Content-Type: application/json
@@ -129,4 +130,12 @@ Content-Type: application/json
            }
            ],
    "name": "Major Leagues V2"
+}
+
+###
+POST http://localhost:5000/player/newPlayer
+Content-Type: application/json
+
+{
+   
 }

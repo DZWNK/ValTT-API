@@ -37,6 +37,20 @@ module.exports = function(connectionString){
                         reject(err);
                     });
             });
+        },
+
+        createPlayer: function(player) {
+            return new Promise((resolve, reject) => {
+                let newPlayer = new Player(player);
+                console.log(newPlayer);
+                newPlayer.save(err => {
+                    if (err) {
+                        reject(`Error Saving player in database: ${err}`);
+                    } else {
+                        resolve(`New player added to database`);
+                    }
+                });           
+            });
         }
     }
 }

@@ -86,13 +86,13 @@ module.exports = function(connectionString){
 
         addNewTeam: function(newTeam){
             return new Promise((resolve, reject) => {
-                let team = new Event(newTeam);
-                console.log(newEvent);
+                let team = new Team(newTeam);
+                console.log(team);
                 team.save(err => {
                     if (err) {
-                        reject(`Error Saving event in database: ${err}`);
+                        reject(`Error Saving team in database: ${err}`);
                     } else {
-                        resolve(`New event added to database`);
+                        resolve(`New team added to database`);
                     }
                 });  
             });

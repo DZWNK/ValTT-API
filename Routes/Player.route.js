@@ -17,4 +17,13 @@ router.get('/player', (req, res, next) => {
     });
 })
 
+router.post('/newPlayer', async(req, res, next) =>{
+    playerData.createPlayer(req.body).then((msg) => {
+       res.json({ message: msg });
+   }).catch((err) => {
+       res.json({ message: `An error occured adding Player to database: ${err}` });
+   });
+
+})
+
 module.exports = router
