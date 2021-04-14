@@ -158,7 +158,11 @@ module.exports = function(connectionString){
         createEvent: function(event, id) {
             return new Promise((resolve, reject) => {
                 let options = {new: true};
-                Event.findByIdAndUpdate(id, event, options).exec().then(event =>{
+                console.log(event.brackets[0].matches);
+                Event.findByIdAndUpdate(id, event, options).exec().then(eventUpd =>{
+                    for(let j=0; j<event.brackets[0].matches.length; j++){        
+                        eventUpd.brackets[0].matches.push(event.brackets[0].matches[j]);
+                    }
                     resolve('Event successfully updated')
                 }).catch(err => {
                     reject(`Error updating event in database: ${err}`);

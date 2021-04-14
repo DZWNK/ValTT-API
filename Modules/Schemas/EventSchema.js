@@ -21,7 +21,7 @@ const EventsSchema = new Schema({
         PushPerMatch: {type: Boolean},
         PushWinner: {type: Number},
         PushLoser: {type: Number},
-        matches: [{  
+        matches: [{ 
             match: { //Match Preview
                 id: {type: String},
                 teams: [{ //Team preview
@@ -29,14 +29,15 @@ const EventsSchema = new Schema({
                     name: {type: String},
                     activeStatus: {type: Boolean}
                 }],
-                score: {type: String},
-                winner: {type: String},
-                loser: {type: String},
+                score: [{type: Number}], //array of numbers from string
+                winner: {type: Number},
+                loser: {type: Number},
                 activeStatus: {type: Boolean},
                 timePlayed: {type: Date, default: Date.now},
                 winsNeeded: {type: Number}
              },
              prize: {type: String}
+
         }]
     }]
 })

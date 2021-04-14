@@ -82,19 +82,19 @@ Content-Type: application/json
 }
 
 ###
-PATCH  http://localhost:5000/event/newEvent?id=6016efe0ab5762fee7e18e70
+PATCH  http://localhost:5000/event/newEvent?id=606b57bf2cc078f5b7adb184
 Content-Type: application/json
 
 {
    "runningStatus": true,
-   "dateCreated": "2021-01-27T05:00:00.000+00:00",
-   "startDate": "2021-02-01T05:00:00.000+00:00",
-   "endDate": "2021-02-27T05:00:00.000+00:00",
+   "dateCreated": "2021-04-14T02:51:50.369+00:00",
+   "startDate": "2021-05-01T05:00:00.000+00:00",
+   "endDate": "",
    "watchLink" : "",
    "verified" : true,
    "featured": true,
    "brackets" : [{
-        "BracketName": "Bracket 12",
+        "BracketName": "Bracket 87",
         "PushPerMatch": true,
         "PushWinner": 1,
         "PushLoser": 1,
@@ -111,15 +111,37 @@ Content-Type: application/json
                "activeStatus": true
            }
            ],
-           "score": "3-5",
+           "score": [11,5],
            "winner": 1,
             "loser": 2,
             "winsNeeded": 4,
-            "timePlayed": "2021-04-01T04:00:00.000+00:00",
-            "id": "2021-04-01T04:00:00.000+00:00"
+            "activeStatus": true,
+            "timePlayed": "2021-04-01T04:00:00.000+00:00"
            },
            "prize": "$90000"
-        }]
+        },
+        {"match":{
+               "teams": [{
+               "id": "6016e68aab5762fee7e18e56",
+               "name": "Wonder Gamers",
+               "activeStatus": true
+           },
+           {
+               "id": "6016e9a5ab5759fee7e18e59",
+               "name": "Wizkids",
+               "activeStatus": true
+           }
+           ],
+           "score": [9,0],
+           "winner": 1,
+            "loser": 2,
+            "winsNeeded": 5,
+            "activeStatus": true,
+            "timePlayed": "2021-04-01T04:00:00.000+00:00"
+           },
+           "prize": "$110000"
+        }
+        ]
    }],
    "teams": [{
                "id": "6016e68aab5762fee7e18e51",
@@ -130,9 +152,19 @@ Content-Type: application/json
                "id": "6016e9a5ab5762fee7e18e59",
                "name": "Faze Clan",
                "activeStatus": true
+           },
+           {
+               "id": "6016e68aab5762fee7e18e56",
+               "name": "Wonder Gamers",
+               "activeStatus": true
+           },
+           {
+               "id": "6016e9a5ab5759fee7e18e59",
+               "name": "Wizkids",
+               "activeStatus": true
            }
            ],
-   "name": "Major Leagues V3 Update"
+   "name": "V-R Updated Event"
 }
 
 ###
