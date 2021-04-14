@@ -155,7 +155,7 @@ module.exports = function(connectionString){
             });
         },
 
-        createEvent: function(event, id) {
+        updateEvent: function(event, id) {
             return new Promise((resolve, reject) => {
                 let options = {new: true};
                 console.log(event.brackets[0].matches);
@@ -167,6 +167,20 @@ module.exports = function(connectionString){
                 }).catch(err => {
                     reject(`Error updating event in database: ${err}`);
                 });       
+            });
+        },
+
+        createEvent: function(event) {
+            return new Promise((resolve, reject) => {
+                let newEvent = new Event(event);
+                console.log(newEvent);
+                newEvent.save(err => {
+                    if (err) {
+                        reject(`Error Saving event in database: ${err}`);
+                    } else {
+                        resolve(`New event added to database`);
+                    }
+                }); 
             });
         }
     }

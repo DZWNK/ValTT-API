@@ -108,7 +108,17 @@ router.get('/event', async (req, res, next) => {
 //PATCH for updating Event
 router.patch('/newEvent', async (req, res, next) => {
   //do the update
-  eventData.createEvent(req.body, req.query.id).then((msg) => {
+  eventData.updateEvent(req.body, req.query.id).then((msg) => {
+    res.json({ message: msg });
+  }).catch((err) => {
+    res.json({ message: `An error occured updating Event from database: ${err}` });
+  });
+
+})
+
+router.post('/newEvent', async (req, res, next) => {
+  //do the update
+  eventData.createEvent(req.body).then((msg) => {
     res.json({ message: msg });
   }).catch((err) => {
     res.json({ message: `An error occured adding Event to database: ${err}` });

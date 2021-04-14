@@ -174,3 +174,90 @@ Content-Type: application/json
 {
    
 }
+
+###
+POST  http://localhost:5000/event/newEvent
+Content-Type: application/json
+
+{
+   "runningStatus": false,
+   "dateCreated": "2021-04-14T02:51:50.369+00:00",
+   "startDate": "2021-05-01T05:00:00.000+00:00",
+   "endDate": "",
+   "watchLink" : "",
+   "verified" : true,
+   "featured": true,
+   "brackets" : [{
+        "BracketName": "Bracket 87",
+        "PushPerMatch": true,
+        "PushWinner": 1,
+        "PushLoser": 1,
+        "matches": [{
+           "match":{
+               "teams": [{
+               "id": "6016e68aab5762fee7e18e51",
+               "name": "Gamer Boys",
+               "activeStatus": true
+           },
+           {
+               "id": "6016e9a5ab5762fee7e18e59",
+               "name": "Faze Clan",
+               "activeStatus": true
+           }
+           ],
+           "score": [11,5],
+           "winner": 1,
+            "loser": 2,
+            "winsNeeded": 4,
+            "activeStatus": true,
+            "timePlayed": "2021-04-01T04:00:00.000+00:00"
+           },
+           "prize": "$90000"
+        },
+        {"match":{
+               "teams": [{
+               "id": "6016e68aab5762fee7e18e56",
+               "name": "Wonder Gamers",
+               "activeStatus": true
+           },
+           {
+               "id": "6016e9a5ab5759fee7e18e59",
+               "name": "Wizkids",
+               "activeStatus": true
+           }
+           ],
+           "score": [9,0],
+           "winner": 1,
+            "loser": 2,
+            "winsNeeded": 5,
+            "activeStatus": true,
+            "timePlayed": "2021-04-01T04:00:00.000+00:00"
+           },
+           "prize": "$110000"
+        }
+        ]
+   }],
+   "teams": [{
+               "id": "6016e68aab5762fee7e18e51",
+               "name": "Gamer Boys",
+               "activeStatus": true
+           },
+           {
+               "id": "6016e9a5ab5762fee7e18e59",
+               "name": "Faze Clan",
+               "activeStatus": true
+           },
+           {
+               "id": "6016e68aab5762fee7e18e56",
+               "name": "Wonder Gamers",
+               "activeStatus": true
+           },
+           {
+               "id": "6016e9a5ab5759fee7e18e59",
+               "name": "Wizkids",
+               "activeStatus": true
+           }
+           ],
+   "name": "Valorant Main Event"
+}
+
