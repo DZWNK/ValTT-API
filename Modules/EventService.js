@@ -155,8 +155,20 @@ module.exports = function(connectionString){
             });
         },
 
-        createEvent: function(event) {
+        createEvent: function(event, id) {
             return new Promise((resolve, reject) => {
+                let options = {new: true};
+                Event.findByIdAndUpdate(id, event, options).exec().then(event =>{
+                    resolve('Event successfully updated')
+                }).catch(err => {
+                    reject(`Error updating event in database: ${err}`);
+                });       
+            });
+        }
+    }
+}
+
+                /* For creating new Event
                 let newEvent = new Event(event);
                 console.log(newEvent);
                 newEvent.save(err => {
@@ -165,8 +177,4 @@ module.exports = function(connectionString){
                     } else {
                         resolve(`New event added to database`);
                     }
-                });           
-            });
-        }
-    }
-}
+                });   */ 

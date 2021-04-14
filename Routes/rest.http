@@ -82,7 +82,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:5000/event/newEvent
+PATCH  http://localhost:5000/event/newEvent?id=6016efe0ab5762fee7e18e70
 Content-Type: application/json
 
 {
@@ -132,7 +132,7 @@ Content-Type: application/json
                "activeStatus": true
            }
            ],
-   "name": "Major Leagues V2"
+   "name": "Major Leagues V3 Update"
 }
 
 ###

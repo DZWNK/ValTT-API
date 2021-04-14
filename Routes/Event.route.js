@@ -104,10 +104,10 @@ router.get('/event', async(req, res, next) =>{
     });
 })
 
-//POST for creating new Event
-router.post('/newEvent', async(req, res, next) =>{
-        //do the insert
-        eventData.createEvent(req.body).then((msg) => {
+//PATCH for updating Event
+router.patch('/newEvent', async(req, res, next) =>{
+        //do the update
+        eventData.createEvent(req.body, req.query.id).then((msg) => {
           res.json({ message: msg });
       }).catch((err) => {
           res.json({ message: `An error occured adding Event to database: ${err}` });
