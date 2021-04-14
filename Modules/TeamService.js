@@ -50,8 +50,8 @@ module.exports = function(connectionString){
 
         getTeamById: function(id) {
             return new Promise((resolve, reject) => {
-                console.log(`Finding team by team id: ${data}`);
-                Team.find({ _id: id }).exec().then(team => {
+                console.log(`Finding team by team id: ${id}`);
+                Team.findOne({ _id: id }).exec().then(team => {
                     resolve(team);
                 }).catch(err => {
                     reject(err);

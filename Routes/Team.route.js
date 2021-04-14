@@ -33,10 +33,10 @@ router.get('/team', (req, res, next) => {
     });
 })
 
-router.get('/team', (req, res, next) => {
+router.get('/teambyId', (req, res, next) => {
     teamData.getTeamById(req.query.id).then(team => {
-        if (team[0] != null) {
-            res.json(team[0])
+        if (team != null) {
+            res.json(team)
         }
         else {
             res.json({ message: `Cannot Find Team with id ${req.query.id}` });

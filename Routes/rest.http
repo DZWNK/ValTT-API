@@ -53,7 +53,7 @@ GET http://localhost:5000/team/verified
 GET http://localhost:5000/team/team?teamName=Gamer Boys
 
 ###
-GET http://localhost:5000/team/team?id=6016e9a5ab5762fee7e18e59
+GET http://localhost:5000/team/teambyId?id=6016e68aab5762fee7e18e51
 
 ###
 GET http://localhost:5000/event/verified?page=1&numfetched=10
@@ -70,6 +70,8 @@ GET http://localhost:5000/match/match?id=6016eb3cab5762fee7e18e65
 ###
 GET http://localhost:5000/event/event?id=6016efe0ab5762fee7e18e70
 
+###
+GET http://localhost:5000/team/team?id=6016e68aab5762fee7e18e51
 ###
 GET http://localhost:5000/player/player?id=6016e4b4ab5762fee7e18e4b
 
