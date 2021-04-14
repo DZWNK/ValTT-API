@@ -33,6 +33,19 @@ router.get('/team', (req, res, next) => {
     });
 })
 
+router.get('/team', (req, res, next) => {
+    teamData.getTeamById(req.query.id).then(team => {
+        if (team[0] != null) {
+            res.json(team[0])
+        }
+        else {
+            res.json({ message: `Cannot Find Team with id ${req.query.id}` });
+        }
+    }).catch((err) => {
+        next(err)
+    });
+})
+
 router.get('/verified', (req, res, next) => {
     teamData.getVerifiedTeams().then(teams => {
         if (teams[0] != null) {

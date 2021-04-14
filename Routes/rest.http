@@ -53,6 +53,9 @@ GET http://localhost:5000/team/verified
 GET http://localhost:5000/team/team?teamName=Gamer Boys
 
 ###
+GET http://localhost:5000/team/team?id=6016e9a5ab5762fee7e18e59
+
+###
 GET http://localhost:5000/event/verified?page=1&numfetched=10
 
 ###
